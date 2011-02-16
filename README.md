@@ -19,3 +19,7 @@
 
 # Contributing
  We welcome contributions to the Dormitory Management System project. If you find any bugs, have suggestions for improvements, or would like to add new features, please feel free to open an issue or submit a pull request.
+
+
+
+# nothing special
