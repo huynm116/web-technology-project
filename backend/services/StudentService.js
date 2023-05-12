@@ -1,24 +1,20 @@
-const BlogModel = require("../models/Student");
+const StudentModel = require("../models/Student");
 
-exports.getAllBlogs = async () => {
-  return await BlogModel.find();
+exports.getAllStudents = async () => {
+  return await StudentModel.find();
 };
 
-exports.createBlog = async (blog) => {
-  return await BlogModel.create(blog);
+exports.createStudent = async (student) => {
+  return await StudentModel.create(student);
 };
-exports.getBlogById = async (id) => {
-  return await BlogModel.findById(id);
-};
-
-exports.updateBlog = async (id, blog) => {
-  return await BlogModel.findByIdAndUpdate(id, blog);
+exports.getStudentByID = async (id) => {
+  return await StudentModel.findById(id);
 };
 
-exports.deleteBlog = async (id) => {
-  return await BlogModel.findByIdAndDelete(id);
+exports.updateStudent = async (id, student) => {
+  return await StudentModel.findByIdAndUpdate(id, student);
 };
 
-exports.searchTitle = async (keyword) => {
-  return await BlogModel.find({ title: { $regex: keyword, $options: "i" } });
-}
+exports.deleteStudent = async (id) => {
+  return await StudentModel.findByIdAndDelete(id);
+};
