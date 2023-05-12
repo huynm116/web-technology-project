@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const dormController = require('../controllers/dorm.controller');
+const dormController = require('../controllers/DormController');
 
 router.post('/', dormController.createDorm);
 router.get('/:id', dormController.getDormById);

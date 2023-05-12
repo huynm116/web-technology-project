@@ -1,58 +1,49 @@
-const blogService = require("../services/StudentService");
+const studentService = require("../services/StudentService");
 
-exports.getAllBlogs = async (req, res) => {
+exports.getAllStudents = async (req, res) => {
   try {
-    const blogs = await blogService.getAllBlogs();
-    res.json({ data: blogs, status: "success" });
+    const students = await studentService.getAllStudents();
+    res.json({ data: students, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-exports.createBlog = async (req, res) => {
+exports.createStudent = async (req, res) => {
   try {
-    const blog = await blogService.createBlog(req.body);
-    res.json({ data: blog, status: "success" });
+    const student = await studentService.createStudent(req.body);
+    res.json({ data: student, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-exports.getBlogById = async (req, res) => {
+exports.getStudentByID = async (req, res) => {
   try {
-    const blog = await blogService.getBlogById(req.params.id);
-    res.json({ data: blog, status: "success" });
+    const student = await studentService.getStudentByID(req.params.id);
+    res.json({ data: student, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-exports.updateBlog = async (req, res) => {
+exports.updateStudent = async (req, res) => {
   try {
-    const blog = await blogService.updateBlog(req.params.id, req.body);
-    res.json({ data: blog, status: "success" });
+    const student = await studentService.updateStudent(req.params.id, req.body);
+    res.json({ data: student, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-exports.deleteBlog = async (req, res) => {
+exports.deleteStudent = async (req, res) => {
   try {
-    const blog = await blogService.deleteBlog(req.params.id);
-    res.json({ data: blog, status: "success" });
+    const student = await studentService.deleteStudent(req.params.id);
+    res.json({ data: student, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-//create a new API that allows users to enter a keyword for searching title. The web returns all blogs containing the input keyword.
-exports.searchTitle = async (req, res) => {
-  try {
-    const blogs = await blogService.searchTitle(req.params.keyword);
-    res.json({ data: blogs, status: "success" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
 
 

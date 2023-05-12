@@ -1,4 +1,4 @@
-const Dorm = require('../models/dorm.model');
+const Dorm = require('../models/Dorm');
 
 exports.createDorm = async (req, res) => {
   try {

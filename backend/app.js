@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -18,7 +17,7 @@ module.exports = app;
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
 //configure mongoose
-const MONGODB_URI = "mongodb+srv://it4409:it4409-soict@lamdb-crud.qd3s7vv.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI = "mongodb+srv://student:student@cluster0.nb7rtyi.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -28,6 +27,14 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
     console.error('Error connecting to database', error);
   });
 
-const blogRouter = require("./routes/BlogRoutes");
-app.use("/api/blogs", blogRouter);
+// configure routes
+const studentRouter = require("./routes/StudentRoutes");
+const dormRouter = require("./routes/DormRoutes");
+const roomRouter = require("./routes/RoomRoutes");
+
+
+app.use("/api/student", studentRouter);
+app.use("/api/dorm", dormRouter);
+
+
 
