@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+let bodyParser = require('body-parser');
+let dbConfig = require('./database/db');
 
 //middleware
 app.use(cors());
@@ -17,9 +19,9 @@ module.exports = app;
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
 //configure mongoose
-const MONGODB_URI = "mongodb+srv://student:student@cluster0.nb7rtyi.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI = "";
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbConfig.db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to database');
   })
@@ -35,6 +37,16 @@ const roomRouter = require("./routes/RoomRoutes");
 
 app.use("/api/student", studentRouter);
 app.use("/api/dorm", dormRouter);
+app.use("/api/room",roomRouter);
 
+app.use((req, res, next) => {
+  res.status(404).send('Error 404!')
+});
+  
+app.use(function (err, req, res, next) {
+  console.error(err.message);
+  if (!err.statusCode) err.statusCode = 500;
+  res.status(err.statusCode).send(err.message);
+});
 
 

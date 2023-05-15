@@ -1,4 +1,5 @@
-const StudentModel = require("../models/Student");
+let StudentModel = require("../models/Student");
+
 
 exports.getAllStudents = async () => {
   return await StudentModel.find();
