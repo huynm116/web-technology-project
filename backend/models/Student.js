@@ -1,26 +1,29 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const studentSchema = new Schema({
-  id: Number,
-  student_id: String,
-  firstname: String,
-  middlename: String,
-  lastname: String,
-  department: String,
-  course: String,
-  gender: String,
-  contact: String,
-  email: String,
-  address: String,
-  emergency_name: String,
-  emergency_contact: String,
-  emergency_address: String,
-  emergency_relation: String,
-  status: String,
-  delete_flag: String,
-  date_created: Date,
-  date_updated: Date
+let studentSchema = new Schema({
+  id: {type: Number},
+  student_id: {type: String},
+  firstname: {type: String},
+  middlename: {type: String},
+  lastname: {type: String},
+  department: {type: String},
+  course: {type: String},
+  gender: {type: String},
+  contact: {type: String},
+  email: {type: String},
+  address: {type: String},
+  emergency_name: {type: String},
+  emergency_contact: {type: String},
+  emergency_address: {type: String},
+  emergency_relation: {type: String},
+  status: {
+    type: String,
+    enum: ['active', 'inactive'],
+    default: 'active',
+  },
+}, {
+  collection: "student_list"
 });
 
 module.exports = mongoose.model("Student", studentSchema);

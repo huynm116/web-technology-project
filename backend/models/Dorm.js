@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const DormSchema = new mongoose.Schema({
-  name: {
+  dorm_id: {
     type: String,
     required: true,
   },
@@ -20,10 +20,16 @@ const DormSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rooms: [{
+  room_ids: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Room',
   }],
+  created_at: {
+    type: Date,
+    default: Date.now,
+  }
+}, {
+  collection : 'dorm_list'
 });
 
 module.exports = mongoose.model('Dorm', DormSchema);
