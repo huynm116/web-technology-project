@@ -1,0 +1,40 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('Dorm-management-app');
+
+db.dorm_list.insertMany([
+  {
+    dorm_id: "001",
+    dateCreated: new Date(),
+    status: "active",
+    action: "sample_action_1",
+    room_ids: [],
+    created_at: new Date()
+  },
+  {
+    dorm_id: "002",
+    dateCreated: new Date(),
+    status: "active",
+    action: "sample_action_2",
+    room_ids: [],
+    created_at: new Date()
+  },
+  {
+    dorm_id: "003",
+    dateCreated: new Date(),
+    status: "active",
+    action: "sample_action_3",
+    room_ids: [],
+    created_at: new Date()
+  }
+]);
+
+
+
+
+
+
