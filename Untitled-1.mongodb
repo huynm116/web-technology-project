@@ -6,31 +6,15 @@
 // Select the database to use.
 use('Dorm-management-app');
 
-db.dorm_list.insertMany([
+db.account_list.insertMany([
   {
-    dorm_id: "001",
-    dateCreated: new Date(),
-    status: "active",
-    action: "sample_action_1",
-    room_ids: [],
-    created_at: new Date()
+    password: '$2b$10$kTdm18HwD2SWVDCc0J70UuXssSuLZnlu.qfm0opMR24NCRpmXbKlG',
+    name: "Administrator",
+    username: "admin",
+    email: "ad@gg.com",
+    age: 20,
+    role: 'SA',
   },
-  {
-    dorm_id: "002",
-    dateCreated: new Date(),
-    status: "active",
-    action: "sample_action_2",
-    room_ids: [],
-    created_at: new Date()
-  },
-  {
-    dorm_id: "003",
-    dateCreated: new Date(),
-    status: "active",
-    action: "sample_action_3",
-    room_ids: [],
-    created_at: new Date()
-  }
 ]);
 
 

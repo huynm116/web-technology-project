@@ -4,20 +4,18 @@ const bcrypt = require("bcrypt");
 
 const JWT_SECRET = 'jwt_secret_key';
 const JWT_VALIDITY = '7 days';
+const saltRounds = 10;
 
 exports.loginAccount = async (req, res) => {
     try {
-        //await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const { email, password } = req.body;
-        await Account.find({ email: email }).then(user => {
-            if (user) {
+        await Account.findOne({ email: email }).then(user => {
+            if (!user) {
                 res.status(400).json({ message: 'Invalid email or password' });
             } else {
-                bcrypt.compare(password, user.password, (error, result) => {
-                    if (error) {
-                        console.error('Error comparing passwords:', error);
-                    } else {
+                bcrypt.compare(password, user.password).then(result => {
                         if (result) {
                             const accessToken = jwt.sign({ userId: user._id }, JWT_SECRET, {
                                 expiresIn: JWT_VALIDITY,
@@ -37,8 +35,7 @@ exports.loginAccount = async (req, res) => {
                             console.log('Passwords do not match. Authentication failed.');
                             res.status(400).json({ message: 'Invalid email or password' });
                         }
-                    }
-                });
+                    }).catch(error => console.error('Error comparing passwords:', error));
             }
         }).catch(error => console.log(error));
 
@@ -50,51 +47,41 @@ exports.loginAccount = async (req, res) => {
 };
 
 exports.registerAccount = async (req, res) => {
-    let newUser = {
-        role: '',
-        name: '',
-        username: '',
-        email: '',
-        age: 0,
-        password: '',
-    }
+    // let newUser = {
+    //     role: '',
+    //     name: '',
+    //     username: '',
+    //     email: '',
+    //     age: 0,
+    //     password: '',
+    // }
     try {
         const { name, email, username, password, age } = req.body;
         await Account.find({ email: email }).then(user => {
-            const saltRounds = 10;
+         
 
             if (user[0] != null) {
                 res.status(400).json({ message: 'User already exists!', u: user });
             } else {
-                newUser.role = 'GUEST';
-                newUser.age = age;
-                newUser.email = email;
-                newUser.username = username;
-                newUser.name = name;
-                bcrypt.hash(password, saltRounds, (error, hashedPassword) => {
-                    if (error) {
-                        console.error('Error hashing password:', error);
-                    } else {
-                        newUser.password = hashedPassword;
-                    }
-                });
-                const accessToken = jwt.sign({ userId: newUser._id }, JWT_SECRET, {
-                    expiresIn: JWT_VALIDITY,
-                });
-                Account.create(newUser);
-                res.status(200).json({
-                    accessToken,
-                    user: {
-                        _id: newUser._id,
-                        email: newUser.email,
-                        name: newUser.name,
-                        username: newUser.username,
-                        role: newUser.role,
-                        age: newUser.age,
-                        password: newUser.password
-                    },
-                },
-                );
+                
+                bcrypt.hash(password, saltRounds).then(hashedPassword => {
+                    let newUser = {
+                        role: 'GUEST',
+                        email :email,
+                        username: username,
+                        name: name,
+                        age: age,
+                        password: hashedPassword,
+                    };
+                    const accessToken = jwt.sign({ userId: newUser._id }, JWT_SECRET, {
+                        expiresIn: JWT_VALIDITY,
+                    });
+                    Account.create(newUser);
+                    res.status(200).json({
+                        accessToken,
+                        newUser,
+                    },)
+                }).catch(error => console.log(error));
             }
         }).catch(error => console.log(error));
 
