@@ -71,7 +71,7 @@ Mock.onPost('/api/auth/register').reply((config) => {
       avatar: '/assets/images/face-6.jpg',
       age: 25,
     };
-    userList.push(newUser);
+    //userList.push(newUser);
 
     const accessToken = jwt.sign({ userId: newUser.id }, JWT_SECRET, {
       expiresIn: JWT_VALIDITY,
