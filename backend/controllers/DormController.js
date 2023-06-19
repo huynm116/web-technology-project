@@ -18,6 +18,15 @@ exports.createDorm = async (req, res) => {
   }
 };
 
+exports.getAllDorms = async (req, res) => {
+  try {
+    const dorms = await Dorm.find();
+    res.json(dorms);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 exports.getDormById = async (req, res) => {
   try {
     const dorm = await Dorm.findById(req.params.id);

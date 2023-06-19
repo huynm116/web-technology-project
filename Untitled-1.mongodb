@@ -1,0 +1,24 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('Dorm-management-app');
+
+db.account_list.insertMany([
+  {
+    password: '$2b$10$kTdm18HwD2SWVDCc0J70UuXssSuLZnlu.qfm0opMR24NCRpmXbKlG',
+    name: "Administrator",
+    username: "admin",
+    email: "ad@gg.com",
+    age: 20,
+    role: 'SA',
+  },
+]);
+
+
+
+
+
+
