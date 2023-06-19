@@ -21,6 +21,8 @@ mongoose.set('strictQuery', false);
 //configure mongoose
 const MONGODB_URI = "";
 
+console.log(dbConfig.db);
+
 mongoose.connect(dbConfig.db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to database');

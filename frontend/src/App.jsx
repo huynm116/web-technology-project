@@ -1,37 +1,10 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn 
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
 import { useEffect, useState } from "react";
 import "./App.css";
 import roomService from "./services/room";
 
 function newEmptyFormData() {
     console.log("Creating new form data...");
-    return { room_id: "", dorm_id: "", slot: "", available: "", price: "", status:"" };
+    return { title: "", author: "", category: "", description: "", image: "" };
   }
   
 function App() {
@@ -57,7 +30,7 @@ function App() {
           // Normally, data is enough to pass to setBlogs. However, backend in
           // class's exercise returns data as { data: [blogs], status: [status] }.
           const returnedRooms = data.data;
-          setRooms(returnedRooms);
+          setBooks(returnedRooms);
         } catch (error) {
           alert("Failed to get rooms!");
         }
@@ -90,8 +63,8 @@ function App() {
           console.log("Returned room after creating: ", returnedRoom);
           // returnedBlog should be used to render as backend can process data and
           // normalize it. Shouldn't use formData as it isn't normalized.
-          const newRooms = rooms.concat(returnedRoom);
-          setRooms(newRooms);
+          const newRooms = books.concat(returnedRoom);
+          setBooks(newRooms);
           setFormData(newEmptyFormData());
           alert("Room created!");
         } catch (error) {
@@ -137,8 +110,8 @@ function App() {
         const data = await roomService.remove(id);
         const returnedRoom = data.data;
         // Delete blog from blogs array and rerender locally
-        const newRooms = rooms.filter((room) => room._id !== returnedRoom._id);
-        setRooms(newRooms);
+        const newBooks = rooms.filter((room) => blog._id !== returnedRoom._id);
+        setBooks(newRooms);
         alert("Room deleted!");
       } catch (error) {
         alert("Failed to delete room!");
@@ -168,15 +141,15 @@ function App() {
         {showForm && formType === "update" && <h2>Update room</h2>}
         
         {/* Display form or books depending on showForm, if showForm = true ( create or updat (not null)) -> create or update form, if showForm = false (null) -> show list of books */}
-        {showForm === false && 
+        {showForm == false && 
         <table id="header">
           <tr>
-                    <td id="tab-title">Room id</td>
-                    <td id="tab-author">Dorm id</td>
-                    <td id="tab-category">Slot</td>
-                    <td id="tab-description">Available</td>
-                    <td id="tab=image">Price</td>
-                    <td id="tab-action">Status</td>
+                    <td id="tab-title">Title</td>
+                    <td id="tab-author">Author</td>
+                    <td id="tab-category">Category</td>
+                    <td id="tab-description">Description</td>
+                    <td id="tab=image">Image</td>
+                    <td id="tab-action">Action</td>
                   </tr>
           </table>}
         {showForm ? (
@@ -193,7 +166,7 @@ function App() {
               required
               type="text"
               name="title"
-              placeholder="Room id"
+              placeholder="Title"
               value={formData.title}
               onChange={handleChange}
             />
@@ -201,7 +174,7 @@ function App() {
               required
               type="text"
               name="author"
-              placeholder="Dorm id"
+              placeholder="Author"
               value={formData.author}
               onChange={handleChange}
             />
@@ -209,13 +182,13 @@ function App() {
               required
               type="text"
               name="category"
-              placeholder="Slot"
+              placeholder="Category"
               value={formData.category}
               onChange={handleChange}
             />
             <textarea
               name="description"
-              placeholder="Available"
+              placeholder="Description"
               rows={5}
               value={formData.description}
               onChange={handleChange}
@@ -223,7 +196,7 @@ function App() {
             <input
               type="text"
               name="image"
-              placeholder="Price"
+              placeholder="Image URL"
               value={formData.image}
               onChange={handleChange}
             />
@@ -238,17 +211,16 @@ function App() {
               <div key={room._id}>  
                 <table>
                   <tr>
-                    <td id="tab-title">{room.room_id}</td>
-                    <td id="tab-author">{room.dorm_id}</td>
-                    <td id="tab-category">{room.slot}</td>
-                    <td id="tab-description">{room.available}</td>
-                    {/* <td id="tab=image"><img
+                    <td id="tab-title">{room.title}</td>
+                    <td id="tab-author">{room.author}</td>
+                    <td id="tab-category">{room.category}</td>
+                    <td id="tab-description">{room.description}</td>
+                    <td id="tab=image"><img
                   src={room.image}
                   alt={`Thumbnail for ${room.title}`}
                   style={{ height: "250px", marginTop: "10px", marginBottom: "5px"
                 }}
-                    /></td> */}
-                    <td id="tab=image">{room.price}</td>
+                    /></td>
                     <td id="tab-action">
                       <button
                         onClick={() => {
