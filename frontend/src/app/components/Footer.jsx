@@ -1,8 +1,8 @@
-import { AppBar, Button, ThemeProvider, Toolbar } from '@mui/material';
+import { AppBar, ThemeProvider, Toolbar } from '@mui/material';
 import { styled, useTheme } from '@mui/system';
 import useSettings from 'app/hooks/useSettings';
 import { topBarHeight } from 'app/utils/constant';
-import { Paragraph, Span } from './Typography';
+import { Span } from './Typography';
 
 const AppFooter = styled(Toolbar)(() => ({
   display: 'flex',
