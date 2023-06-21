@@ -8,7 +8,7 @@ exports.createRoom = async (room) => {
   return await RoomModel.create(room);
 };
 exports.getRoomById = async (id) => {
-  return await RoomModel.findById(id);
+  return await RoomModel.findOne({room_id: id});
 };
 
 exports.updateRoom = async (id, room) => {
