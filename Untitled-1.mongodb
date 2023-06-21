@@ -6,16 +6,35 @@
 // Select the database to use.
 use('Dorm-management-app');
 
-db.account_list.insertMany([
+db.student_list.updateMany({}, [
   {
-    password: '$2b$10$kTdm18HwD2SWVDCc0J70UuXssSuLZnlu.qfm0opMR24NCRpmXbKlG',
-    name: "Administrator",
-    username: "admin",
-    email: "ad@gg.com",
-    age: 20,
-    role: 'SA',
+    $set: {
+      name: {
+        $trim: {
+          input: {
+            $concat: [
+              "$firstname",
+              { $ifNull: ["$middlename", ""] },
+              " ",
+              "$lastname"
+            ]
+          }
+        }
+      }
+    }
   },
-]);
+  {
+    $unset: ["firstname", "middlename", "lastname"]
+  }
+])
+
+
+
+
+
+
+
+
 
 
 
