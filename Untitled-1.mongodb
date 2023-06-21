@@ -5,28 +5,12 @@
 
 // Select the database to use.
 use('Dorm-management-app');
+const dorm_id = '003';
+db.dorm_list.updateOne(
+  { dorm_id: dorm_id },
+  { $push: { room_ids: { $each: db.room_list.distinct('room_id', { dorm_id: dorm_id }) } } }
+);
 
-db.student_list.updateMany({}, [
-  {
-    $set: {
-      name: {
-        $trim: {
-          input: {
-            $concat: [
-              "$firstname",
-              { $ifNull: ["$middlename", ""] },
-              " ",
-              "$lastname"
-            ]
-          }
-        }
-      }
-    }
-  },
-  {
-    $unset: ["firstname", "middlename", "lastname"]
-  }
-])
 
 
 

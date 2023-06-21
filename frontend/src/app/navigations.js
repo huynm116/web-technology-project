@@ -17,7 +17,8 @@ export const navigations = [
     icon: 'people',
     children: [
       {name: 'Student list', iconText: '', path: '/students/list'},
-      {name: 'Add Student', iconText: '', path: '/students/add'},
+      {name: 'New Student', iconText: '', path: '/students/create'},
+      {name: 'Add student to room', iconText: '', path: '/students/add'},
     ]
   },
   {
@@ -61,10 +62,4 @@ export const navigations = [
   //   icon: 'trending_up',
   //   children: [{ name: 'Echarts', path: '/charts/echarts', iconText: 'E' }],
   // },
-  {
-    name: 'Documentation',
-    icon: 'launch',
-    type: 'extLink',
-    path: 'http://demos.ui-lib.com/matx-react-doc/',
-  },
 ];

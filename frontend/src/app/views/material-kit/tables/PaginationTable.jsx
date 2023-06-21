@@ -59,7 +59,7 @@ const PaginationTable = (props) => {
         axios.delete(`http://localhost:4444/api/${objectType}/` + id).then((res) => {
         if (res.status === 200) {
           alert("Student successfully deleted");
-          navigate("/dashboard/default");
+          navigate("/students/list");
         } else Promise.reject();
       })
         .catch((err) => alert("Something went wrong"))}
