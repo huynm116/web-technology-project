@@ -9,7 +9,7 @@ exports.createStudent = async (student) => {
   return await StudentModel.create(student);
 };
 exports.getStudentByID = async (id) => {
-  return await StudentModel.findById(id);
+  return await StudentModel.findOne({student_id: id});
 };
 
 exports.updateStudent = async (id, student) => {

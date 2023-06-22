@@ -4,9 +4,7 @@ const Schema = mongoose.Schema;
 let studentSchema = new Schema({
   id: {type: Number},
   student_id: {type: String},
-  firstname: {type: String},
-  middlename: {type: String},
-  lastname: {type: String},
+  name: {type: String},
   department: {type: String},
   course: {type: String},
   gender: {type: String},

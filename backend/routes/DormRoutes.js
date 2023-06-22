@@ -1,10 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const dormController = require('../controllers/DormController');
+const express = require("express");
+const {
+  createDorm,
+  getAllDorms,
+  getDormByID,
+  updateDorm,
+  deleteDorm
+} = require("../controllers/DormController");
 
-router.post('/', dormController.createDorm).get('/', dormController.getAllDorms);
-router.get('/:id', dormController.getDormById);
-router.put('/:id', dormController.updateDormById);
-router.delete('/:id', dormController.deleteDormById);
+const router = express.Router();
+
+router.route("/").get(getAllDorms).post(createDorm);
+router.route("/:id").get(getDormByID).put(updateDorm).delete(deleteDorm);
 
 module.exports = router;

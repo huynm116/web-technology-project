@@ -45,14 +45,14 @@ exports.deleteRoom = async (req, res) => {
   }
 };
 
-//create a new API that allows users to enter a keyword for searching title. The web returns all blogs containing the input keyword.
-// exports.searchTitle = async (req, res) => {
-//   try {
-//     const blogs = await blogService.searchTitle(req.params.keyword);
-//     res.json({ data: blogs, status: "success" });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
+exports.getRoomByDormId = async (req, res) => {
+  try {
+    const room = await roomService.getRoomByDormId(req.params.id);
+    res.json({ data: room, status: "success" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 
 

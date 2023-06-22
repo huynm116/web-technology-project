@@ -5,17 +5,20 @@
 
 // Select the database to use.
 use('Dorm-management-app');
+const dorm_id = '003';
+db.dorm_list.updateOne(
+  { dorm_id: dorm_id },
+  { $push: { room_ids: { $each: db.room_list.distinct('room_id', { dorm_id: dorm_id }) } } }
+);
 
-db.account_list.insertMany([
-  {
-    password: '$2b$10$kTdm18HwD2SWVDCc0J70UuXssSuLZnlu.qfm0opMR24NCRpmXbKlG',
-    name: "Administrator",
-    username: "admin",
-    email: "ad@gg.com",
-    age: 20,
-    role: 'SA',
-  },
-]);
+
+
+
+
+
+
+
+
 
 
 

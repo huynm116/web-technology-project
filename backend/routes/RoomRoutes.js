@@ -5,12 +5,13 @@ const {
   getRoomById,
   updateRoom,
   deleteRoom,
+  getRoomByDormId
 } = require("../controllers/RoomController");
 
 const router = express.Router();
 
 router.route("/").get(getAllRooms).post(createRoom);
 router.route("/:id").get(getRoomById).put(updateRoom).delete(deleteRoom);
-// router.route("/search/:keyword").get(searchTitle);
+router.route("/dorm/:id").get(getRoomByDormId);
 
 module.exports = router;

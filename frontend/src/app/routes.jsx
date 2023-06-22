@@ -4,6 +4,10 @@ import NotFound from 'app/views/sessions/NotFound';
 import sessionRoutes from 'app/views/sessions/SessionRoutes';
 import { Navigate } from 'react-router-dom';
 import MatxLayout from './components/MatxLayout/MatxLayout';
+import materialRoutes from './views/material-kit/MaterialRoutes';
+import studentRoutes from './views/students/StudentRoutes';
+import roomRoutes from './views/rooms/RoomRoutes';
+import dormRoutes from './views/dorms/DormRoutes';
 
 const routes = [
   {
@@ -12,7 +16,7 @@ const routes = [
         <MatxLayout />
       </AuthGuard>
     ),
-    children: [...dashboardRoutes, ],
+    children: [...dashboardRoutes, ...materialRoutes, ...studentRoutes, ...roomRoutes, ...dormRoutes],
   },
   ...sessionRoutes,
   { path: '/', element: <Navigate to="dashboard/default" /> },
