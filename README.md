@@ -7,6 +7,7 @@ Frontend: React.js
 Database: MongoDB
 
 Features
+
 Room Allocation: The system allows administrators to allocate rooms to residents based on their preferences, availability, and other criteria.
 
 Resident Management: Administrators can manage resident information, including personal details, contact information, and any additional documentation.
