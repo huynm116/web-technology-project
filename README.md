@@ -8,10 +8,15 @@ Database: MongoDB
 
 Features
 Room Allocation: The system allows administrators to allocate rooms to residents based on their preferences, availability, and other criteria.
+
 Resident Management: Administrators can manage resident information, including personal details, contact information, and any additional documentation.
+
 Inventory Management: The system enables tracking and management of dormitory inventory, such as furniture, appliances, and other amenities.
+
 Billing System: It provides a billing module to generate invoices, track payments, and manage financial transactions.
+
 Maintenance Requests: Residents can submit maintenance requests through the system, and administrators can track and assign tasks accordingly.
+
 Notifications and Communication: The system facilitates communication between administrators and residents through notifications, reminders, and announcements.
 
 
