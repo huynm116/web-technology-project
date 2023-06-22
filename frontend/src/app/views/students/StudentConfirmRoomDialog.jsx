@@ -15,15 +15,18 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
 function ConfirmationDialogRaw(props) {
-  const { onClose, value: valueProp, open, ...other } = props;
+  const { onClose, value: valueProp, open, dorm_id, ...other } = props;
   const [value, setValue] = useState(valueProp);
   const radioGroupRef = useRef(null);
   const [options, setOptions] = useState(['None']);
   useLayoutEffect(() => {
-    axios.get('http://localhost:4444/api/room').then((res) => {
+    let dorm = '';
+    onClose('None');
+    if(dorm_id!=='None') dorm=`/dorm/${dorm_id}`
+    axios.get(`http://localhost:4444/api/room/${dorm}`).then((res) => {
       setOptions(res.data.data);
     }).catch(err => console.log(err));
-  }, [])
+  }, [dorm_id])
   useEffect(() => {
     if (!open) {
       setValue(valueProp);
@@ -80,6 +83,7 @@ ConfirmationDialogRaw.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   value: PropTypes.string.isRequired,
+  dorm_id: PropTypes.string.isRequired
 };
 
 const DialogRoot = styled('div')(({ theme }) => ({
@@ -89,7 +93,7 @@ const DialogRoot = styled('div')(({ theme }) => ({
   '& .paper': { width: '80%', maxHeight: 435 }
 }));
 
-export default function StudentConfirmRoomDialog() {
+export default function StudentConfirmRoomDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('None');
 
@@ -127,6 +131,7 @@ export default function StudentConfirmRoomDialog() {
           value={value}
           className="paper"
           id="room-menu"
+          dorm_id={props.dorm_id}
           onClose={handleClose}
         />
 

@@ -17,6 +17,9 @@ const Container = styled('div')(({ theme }) => ({
 
 const StudentAppDialog = () => {
   const [dormId, setDormId] = useState('None');
+  const handleDorm = (newDorm) => {
+    setDormId(newDorm);
+  }
   useEffect(() => {
 
   })
@@ -28,8 +31,8 @@ const StudentAppDialog = () => {
 
       <Stack spacing={3}>
         <SimpleCard title="Add student to room">
-          <StudentConfirmDormDialog />
-          <StudentConfirmRoomDialog />
+          <StudentConfirmDormDialog onValueChange={handleDorm}/>
+          <StudentConfirmRoomDialog dorm_id={dormId}/>
         </SimpleCard>
       </Stack>
     </Container>

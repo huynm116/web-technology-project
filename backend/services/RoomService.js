@@ -19,6 +19,10 @@ exports.deleteRoom = async (id) => {
   return await RoomModel.findByIdAndDelete(id);
 };
 
+exports.getRoomByDormId = async(id) => {
+  return await RoomModel.find({dorm_id: id});
+}
+
 // exports.searchTitle = async (keyword) => {
 //   return await RoomModel.find({ title: { $regex: keyword, $options: "i" } });
 // }

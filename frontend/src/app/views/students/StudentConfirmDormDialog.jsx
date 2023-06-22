@@ -89,7 +89,7 @@ const DialogRoot = styled('div')(({ theme }) => ({
   '& .paper': { width: '80%', maxHeight: 435 }
 }));
 
-export default function StudentConfirmDormDialog() {
+export default function StudentConfirmDormDialog(props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('None');
 
@@ -102,6 +102,7 @@ export default function StudentConfirmDormDialog() {
 
     if (newValue) {
       setValue(newValue);
+      props.onValueChange(newValue);
     }
   }
 
