@@ -14,16 +14,14 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-
 function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, ...other } = props;
   const [value, setValue] = useState(valueProp);
   const radioGroupRef = useRef(null);
   const [options, setOptions] = useState(['None']);
-
-  useLayoutEffect(()=>{
-    axios.get("http://localhost:4444/api/dorm").then((res) => {
-        setOptions(res.data.data);
+  useLayoutEffect(() => {
+    axios.get('http://localhost:4444/api/dorm').then((res) => {
+      setOptions(res.data.data);
     }).catch(err => console.log(err));
   }, [])
   useEffect(() => {
@@ -56,13 +54,13 @@ function ConfirmationDialogRaw(props) {
       <DialogContent dividers>
         <RadioGroup
           ref={radioGroupRef}
-          aria-label="Ringtone"
-          name="ringtone"
+          aria-label="Dorm"
+          name="dorm"
           value={value}
           onChange={handleChange}
         >
           {options.map((option) => (
-            <FormControlLabel value={option.dorm_id} key={option.dorm_id} control={<Radio />} label={option.dorm_id} />
+            <FormControlLabel value={option.dorm_id} key={option._id} control={<Radio />} label={option.dorm_id} />
           ))}
         </RadioGroup>
       </DialogContent>
@@ -81,7 +79,7 @@ function ConfirmationDialogRaw(props) {
 ConfirmationDialogRaw.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired,
 };
 
 const DialogRoot = styled('div')(({ theme }) => ({
@@ -91,10 +89,9 @@ const DialogRoot = styled('div')(({ theme }) => ({
   '& .paper': { width: '80%', maxHeight: 435 }
 }));
 
-export default function StudentConfirmDialog() {
+export default function StudentConfirmDormDialog() {
   const [open, setOpen] = React.useState(false);
-  const [dormValue, setDormValue] = React.useState('None');
-  const [roomValue, setRoomValue] = React.useState(0);
+  const [value, setValue] = React.useState('None');
 
   function handleClickListItem() {
     setOpen(true);
@@ -104,13 +101,14 @@ export default function StudentConfirmDialog() {
     setOpen(false);
 
     if (newValue) {
-      setDormValue(newValue);
+      setValue(newValue);
     }
   }
 
   return (
     <DialogRoot>
       <List component="div" role="list">
+
 
         <ListItem
           button
@@ -120,31 +118,20 @@ export default function StudentConfirmDialog() {
           onClick={handleClickListItem}
           role="listitem"
         >
-          <ListItemText primary="Dormitory" secondary={dormValue} />
+          <ListItemText primary="Dormitory" secondary={value} />
         </ListItem>
 
         <ConfirmationDialogRaw
           keepMounted
           open={open}
-          value={dormValue}
+          value={value}
           className="paper"
           id="dorm-menu"
           onClose={handleClose}
         />
 
-        <ListItem
-          button
-          divider
-          aria-controls="room-menu"
-          aria-label="Room"
-          onClick={handleClickListItem}
-          role="listitem"
-        >
-          <ListItemText primary="Room" secondary={roomValue} />
-        </ListItem>
 
 
-        
       </List>
     </DialogRoot>
   );

@@ -1,7 +1,10 @@
 import { Stack } from '@mui/material';
 import { Box, styled } from '@mui/material';
 import { Breadcrumb, SimpleCard } from 'app/components';
-import StudentConfirmDialog from './StudentConfirmDialog';
+import StudentConfirmDormDialog from './StudentConfirmDormDialog';
+import StudentConfirmRoomDialog from './StudentConfirmRoomDialog';
+import { useEffect, useState } from 'react';
+
 
 const Container = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -13,6 +16,10 @@ const Container = styled('div')(({ theme }) => ({
 }));
 
 const StudentAppDialog = () => {
+  const [dormId, setDormId] = useState('None');
+  useEffect(() => {
+
+  })
   return (
     <Container>
       <Box className="breadcrumb">
@@ -21,7 +28,8 @@ const StudentAppDialog = () => {
 
       <Stack spacing={3}>
         <SimpleCard title="Add student to room">
-          <StudentConfirmDialog />
+          <StudentConfirmDormDialog />
+          <StudentConfirmRoomDialog />
         </SimpleCard>
       </Stack>
     </Container>
