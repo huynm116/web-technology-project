@@ -23,6 +23,12 @@ exports.getRoomByDormId = async(id) => {
   return await RoomModel.find({dorm_id: id});
 }
 
-// exports.searchTitle = async (keyword) => {
-//   return await RoomModel.find({ title: { $regex: keyword, $options: "i" } });
-// }
+exports.addStudentToRoom = async (room_id, student_id) => {
+  return await RoomModel.updateOne({
+    room_id: room_id
+  }, {
+    $inc: { available: -1 },
+    $push: { student_ids: student_id }
+  },
+  { new: true })
+}

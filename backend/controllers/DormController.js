@@ -46,5 +46,14 @@ exports.deleteDorm = async (req, res) => {
   }
 };
 
+exports.addRoomToDorm = async (req, res) => {
+  try {
+    const dorm = await dormService.addRoomToDorm(req.params.id, req.query.room_id);
+    res.json({data: dorm, status: "success"});
+  }catch (err){
+    res.status(500).json({error: err.message});
+  }
+};
+
 
 

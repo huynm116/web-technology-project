@@ -29,7 +29,7 @@ exports.getRoomById = async (req, res) => {
 
 exports.updateRoom = async (req, res) => {
   try {
-    const room = await roomService.updateRoom(req.params.id, req.body);
+    const room = await roomService.updateRoom({room_id : req.params.id}, req.body);
     res.json({ data: room, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -51,6 +51,14 @@ exports.getRoomByDormId = async (req, res) => {
     res.json({ data: room, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+};
+exports.addStudentToRoom = async (req, res) => {
+  try {
+    const room = await roomService.addStudentToRoom(req.params.id, req.query.student_id);
+    res.json({data: room, status: "success"});
+  }catch (err){
+    res.status(500).json({error: err.message});
   }
 };
 

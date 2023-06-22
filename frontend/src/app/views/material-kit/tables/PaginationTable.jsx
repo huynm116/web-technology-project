@@ -24,7 +24,7 @@ const type={
 const field={
   'student': ['name', 'student_id', 'email', 'gender', 'contact'],
   'room' : ['room_id', 'dorm_id', 'slot', 'available', 'price'],
-  'dorm': ['dorm_id', 'max_room', 'avail_room','status','action']
+  'dorm': ['dorm_id', 'number_of_room', 'avail_room','status','action']
 }
 
 const StyledTable = styled(Table)(() => ({
@@ -59,11 +59,11 @@ const PaginationTable = (props) => {
         axios.delete(`http://localhost:4444/api/${objectType}/` + id).then((res) => {
         if (res.status === 200) {
           alert("Student successfully deleted");
-          navigate("/students/list");
+          navigate(`/${objectType}s/list`);
         } else Promise.reject();
       })
         .catch((err) => alert("Something went wrong"))}
-  }, [id, objectType]);
+  }, [id, objectType, navigate]);
 
 
 

@@ -21,12 +21,18 @@ const DormSchema = new mongoose.Schema({
     required: true,
   },
   room_ids: [{
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'Room',
   }],
   created_at: {
     type: Date,
     default: Date.now,
+  },
+  avail_room: {
+    type: Number,
+  },
+  number_of_room: {
+    type:Number,
   }
 }, {
   collection : 'dorm_list'

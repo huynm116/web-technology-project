@@ -4,12 +4,13 @@ const {
   getAllDorms,
   getDormByID,
   updateDorm,
-  deleteDorm
+  deleteDorm,
+  addRoomToDorm
 } = require("../controllers/DormController");
 
 const router = express.Router();
 
 router.route("/").get(getAllDorms).post(createDorm);
-router.route("/:id").get(getDormByID).put(updateDorm).delete(deleteDorm);
+router.route("/:id").get(getDormByID).delete(deleteDorm).put(addRoomToDorm);
 
 module.exports = router;

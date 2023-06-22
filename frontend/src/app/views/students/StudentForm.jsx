@@ -63,7 +63,6 @@ const StudentForm = () => {
         gender,
         date,
         email,
-        status='active',
     } = state;
 
     return (

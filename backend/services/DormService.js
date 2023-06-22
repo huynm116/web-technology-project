@@ -19,3 +19,13 @@ exports.updateDorm = async (id, dorm) => {
 exports.deleteDorm = async (id) => {
   return await DormModel.findByIdAndDelete(id);
 };
+
+exports.addRoomToDorm = async (dorm_id, room_id) => {
+  return await DormModel.updateOne({
+    dorm_id: dorm_id
+  }, {
+    $inc: { avail_room: 1, number_of_room: 1 },
+    $push: { room_ids: room_id }
+  },
+  { new: true })
+}

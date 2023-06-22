@@ -23,10 +23,10 @@ function ConfirmationDialogRaw(props) {
     let dorm = '';
     onClose('None');
     if(dorm_id!=='None') dorm=`/dorm/${dorm_id}`
-    axios.get(`http://localhost:4444/api/room/${dorm}`).then((res) => {
+    axios.get(`http://localhost:4444/api/room${dorm}`).then((res) => {
       setOptions(res.data.data);
     }).catch(err => console.log(err));
-  }, [dorm_id])
+  }, [dorm_id]);
   useEffect(() => {
     if (!open) {
       setValue(valueProp);
@@ -62,7 +62,7 @@ function ConfirmationDialogRaw(props) {
           value={value}
           onChange={handleChange}
         >
-          {options.map((option) => (
+          {options.sort((a,b) => {return a.room_id - b.room_id}).map((option) => (
             <FormControlLabel value={option.room_id} key={option._id} control={<Radio />} label={option.room_id} />
           ))}
         </RadioGroup>
@@ -106,6 +106,7 @@ export default function StudentConfirmRoomDialog(props) {
 
     if (newValue) {
       setValue(newValue);
+      props.onValueChange('room_id', newValue);
     }
   }
 
