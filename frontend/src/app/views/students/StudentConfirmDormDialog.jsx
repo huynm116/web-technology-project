@@ -59,7 +59,7 @@ function ConfirmationDialogRaw(props) {
           value={value}
           onChange={handleChange}
         >
-          {options.map((option) => (
+          {options.sort((a, b) => {return a.dorm_id - b.dorm_id}).map((option) => (
             <FormControlLabel value={option.dorm_id} key={option._id} control={<Radio />} label={option.dorm_id} />
           ))}
         </RadioGroup>
@@ -102,7 +102,7 @@ export default function StudentConfirmDormDialog(props) {
 
     if (newValue) {
       setValue(newValue);
-      props.onValueChange(newValue);
+      props.onValueChange('dorm_id',newValue);
     }
   }
 

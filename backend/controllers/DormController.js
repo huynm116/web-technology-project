@@ -12,6 +12,7 @@ exports.getAllDorms = async (req, res) => {
 
 exports.createDorm = async (req, res) => {
   try {
+    req.body.avail_room = req.body.number_of_room;
     const dorm = await dormService.createDorm(req.body);
     res.json({ data: dorm, status: "success" });
   } catch (err) {
@@ -43,6 +44,15 @@ exports.deleteDorm = async (req, res) => {
     res.json({ data: dorm, status: "success" });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+};
+
+exports.addRoomToDorm = async (req, res) => {
+  try {
+    const dorm = await dormService.addRoomToDorm(req.params.id, req.query.room_id);
+    res.json({data: dorm, status: "success"});
+  }catch (err){
+    res.status(500).json({error: err.message});
   }
 };
 

@@ -5,11 +5,17 @@
 
 // Select the database to use.
 use('Dorm-management-app');
-const dorm_id = '003';
-db.dorm_list.updateOne(
-  { dorm_id: dorm_id },
-  { $push: { room_ids: { $each: db.room_list.distinct('room_id', { dorm_id: dorm_id }) } } }
-);
+db.room_list.updateMany(
+  { room_id: { $exists: true, $type: "number" } },
+  [
+    { $set: { tempRoomId: { $toString: "$room_id" } } },
+    { $unset: "room_id" },
+    { $set: { room_id: "$tempRoomId" } },
+    { $unset: "tempRoomId" }
+  ]
+)
+
+
 
 
 

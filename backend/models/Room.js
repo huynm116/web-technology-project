@@ -3,14 +3,14 @@ const Student = require("./Student");
 const Schema = mongoose.Schema;
 
 const roomSchema = new Schema({
-    room_id: Number,
+    room_id: String,
     dorm_id: String,
     slot: Number,
     available: Number,
     price: Number,
     status: String,
     student_ids : [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Student',
     }],
     createdAt: {
