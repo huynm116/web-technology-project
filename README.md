@@ -1,10 +1,13 @@
-Introduction
-The Dormitory Management System is a comprehensive software solution designed to streamline and automate the management of dormitories. It provides administrators with the tools to efficiently handle various aspects of dormitory operations, including room allocation, resident management, inventory management, billing, and more. This system aims to simplify the administrative tasks, enhance communication between administrators and residents, and improve overall operational efficiency.
+# Dormitory Management System 
+## A web-based application designed to streamline and enhance the management of dormitories. It serves as a comprehensive tool for dormitory administrators and students, providing a range of features to improve efficiency and convenience.
 
-Technologies Used
-Backend: Node.js
-Frontend: React.js
-Database: MongoDB
+# Introduction
+### The Dormitory Management System is a comprehensive software solution designed to streamline and automate the management of dormitories. It provides administrators with the tools to efficiently handle various aspects of dormitory operations, including room allocation, resident management, inventory management, billing, and more. This system aims to simplify the administrative tasks, enhance communication between administrators and residents, and improve overall operational efficiency.
+
+# Technologies Used
+### Backend: Node.js
+### Frontend: React.js
+### Database: MongoDB
 
 Features
 
