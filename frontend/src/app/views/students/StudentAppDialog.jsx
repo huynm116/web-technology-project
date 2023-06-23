@@ -27,17 +27,24 @@ const StudentAppDialog = () => {
 
 
   const handleSubmit = (event) => {
-    axios.get("http://localhost:4444/api/room/" + room_id).then((res) => {
-      if(res.data.data.available===0){
-        alert(`Room ${room_id} is full`);
+    axios.get("http://localhost:4444/api/room/" + student_id).then((res) => {
+      if(res.data.data ===null){
+        alert("Student does not exist");
         return;
-      };
-      axios.put(`http://localhost:4444/api/room/${room_id}?student_id=${student_id}`).then((res) => {
-        console.log(res.data);
-        alert("Add success");
-      }).catch((err) => {console.log(err);});
-    }).catch(err => console.log(err));
-
+      }
+      axios.get("http://localhost:4444/api/room/" + room_id).then((res) => {
+        if(res.data.data.available===0){
+          alert(`Room ${room_id} is full`);
+          return;
+        };
+        axios.put(`http://localhost:4444/api/room/${room_id}?student_id=${student_id}`).then((res) => {
+          console.log(res.data);
+          alert("Add success");
+        }).catch((err) => {console.log(err);});
+      }).catch(err => console.log(err));
+  
+    })
+    
   };
   const {
     dorm_id,
