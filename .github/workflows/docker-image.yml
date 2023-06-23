@@ -24,7 +24,7 @@ jobs:
        cd ../frontend
        npm install yarn
        yarn
-       yarn start
+       nohup bash -c 'npm start' &
        
 
     - name: Set up QEMU
