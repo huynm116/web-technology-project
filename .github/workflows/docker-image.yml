@@ -20,7 +20,7 @@ jobs:
     - run: |
        cd backend
        npm install -D esbuild
-       npm run start
+       nohup bash -c 'npm start' &
        cd ../frontend
        npm install yarn
        yarn
