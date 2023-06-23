@@ -12,6 +12,7 @@ exports.getAllDorms = async (req, res) => {
 
 exports.createDorm = async (req, res) => {
   try {
+    req.body.avail_room = req.body.number_of_room;
     const dorm = await dormService.createDorm(req.body);
     res.json({ data: dorm, status: "success" });
   } catch (err) {

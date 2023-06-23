@@ -11,6 +11,7 @@ exports.getAllRooms = async (req, res) => {
 
 exports.createRoom = async (req, res) => {
   try {
+    req.body.available = req.body.slot;
     const room = await roomService.createRoom(req.body);
     res.json({ data: room, status: "success" });
   } catch (err) {

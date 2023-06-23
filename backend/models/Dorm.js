@@ -7,10 +7,6 @@ const DormSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  dateCreated: {
-    type: Date,
-    default: Date.now,
-  },
   status: {
     type: String,
     enum: ['active', 'inactive'],

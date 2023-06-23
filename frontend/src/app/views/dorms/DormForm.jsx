@@ -15,24 +15,18 @@ const TextField = styled(TextValidator)(() => ({
     marginBottom: "16px",
 }));
 
-const RoomForm = () => {
+const DormForm = () => {
     const [state, setState] = useState({ date: new Date() });
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        axios.get("http://localhost:4444/api/room/" + state.room_id).then((res) => {
+        axios.get("http://localhost:4444/api/dorm/" + state.dorm_id).then((res) => {
             if (res.data.data != null) {
-                alert("Room already exists");
+                alert("Dorm already exists");
             } else {
-                axios.post("http://localhost:4444/api/room/", state).then((res) => {
-                    axios.put(`http://localhost:4444/api/dorm/${dorm_id}?room_id=${room_id}`).then((res) => {
-                        alert(res.data.status);
-                        navigate("/dashboard/default");
-                    }).catch(err => {
-                        axios.delete(`http://localhost:4444/api/room/${room_id}`).then((res) => {
-                            console.log("Cannot add room to dorm -> deleted room");
-                        }).catch(err => console.log(err));
-                    });
+                axios.post("http://localhost:4444/api/dorm/", state).then((res) => {
+                    alert(res.data.status);
+                    navigate("/dashboard/default");
                 }).catch(err => console.log(err));
             }
         });
@@ -47,10 +41,9 @@ const RoomForm = () => {
 
 
     const {
-        room_id,
-        slot,
         dorm_id,
-        price,
+        number_of_room,
+        action,
         status,
     } = state;
 
@@ -62,30 +55,21 @@ const RoomForm = () => {
 
                         <TextField
                             type="text"
-                            name="room_id"
-                            label="Room ID"
-                            onChange={handleChange}
-                            value={room_id || ""}
-                            validators={["required"]}
-                            errorMessages={["this field is required"]}
-                        />
-
-                        <TextField
-                            type="text"
                             name="dorm_id"
-                            label="Belongs to dorm ID"
+                            label="Dorm ID"
                             onChange={handleChange}
                             value={dorm_id || ""}
                             validators={["required"]}
                             errorMessages={["this field is required"]}
                         />
 
+
                         <TextField
                             type="number"
-                            name="slot"
-                            label="Maximum slot"
+                            name="number_of_room"
+                            label="Maximum room"
                             onChange={handleChange}
-                            value={slot || ""}
+                            value={number_of_room || ""}
                             validators={["required"]}
                             errorMessages={["this field is required"]}
                         />
@@ -94,12 +78,13 @@ const RoomForm = () => {
 
                     <Grid item lg={6} md={6} sm={12} xs={12} sx={{ mt: 2 }}>
 
+
                         <TextField
                             type="text"
-                            name="price"
-                            label="Price"
+                            name="action"
+                            label="Action"
                             onChange={handleChange}
-                            value={price || ""}
+                            value={action || ""}
                             validators={["required"]}
                             errorMessages={["this field is required"]}
                         />
@@ -108,7 +93,7 @@ const RoomForm = () => {
                         <TextField
                             type="text"
                             name="status"
-                            label="Status"
+                            label="Status (either 'active' or 'inactive')"
                             onChange={handleChange}
                             value={status || ""}
                             validators={["required"]}
@@ -127,4 +112,4 @@ const RoomForm = () => {
     );
 };
 
-export default RoomForm;
+export default DormForm;

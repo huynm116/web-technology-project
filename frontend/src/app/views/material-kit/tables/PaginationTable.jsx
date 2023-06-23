@@ -42,6 +42,7 @@ const PaginationTable = (props) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [id, setId] = useState('');
+  const [_id, set_Id] = useState('');
   const {type: objectType, dataList} = props;
   const navigate = useNavigate();
   const handleChangePage = (_, newPage) => {
@@ -55,15 +56,15 @@ const PaginationTable = (props) => {
 
   useEffect(() => {
     if (id === '') return;
-    if(window.confirm("Do you want to delete "+objectType + " with id: " + id)){
+    if(window.confirm("Do you want to delete "+ objectType + " with id: " + _id)){
         axios.delete(`http://localhost:4444/api/${objectType}/` + id).then((res) => {
         if (res.status === 200) {
-          alert("Student successfully deleted");
-          navigate(`/${objectType}s/list`);
+          alert(`${objectType.charAt(0).toUpperCase()+objectType.slice(1)} successfully deleted`);
+          navigate(`/dashboard/default`);
         } else Promise.reject();
       })
         .catch((err) => alert("Something went wrong"))}
-  }, [id, objectType, navigate]);
+  }, [id, objectType, navigate, _id]);
 
 
 
@@ -93,7 +94,7 @@ const PaginationTable = (props) => {
                 <TableCell align="center">{data[field[objectType][4]]}</TableCell>
 
                 <TableCell align="right">
-                  <IconButton onClick={() => setId(data._id)}>
+                  <IconButton onClick={() => {setId(data._id); set_Id(data[field[objectType][0]])}}>
                     <Icon color="error">close</Icon>
                   </IconButton>
                 </TableCell>
