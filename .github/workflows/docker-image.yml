@@ -17,14 +17,13 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-    - run: |
-       cd backend
-       npm install -D esbuild
-       npm --version
-       cd ../frontend
-       npm install yarn
-       yarn
-       yarn --version
+    - run: cd backend
+    - run:   npm install -D esbuild
+    - run:   npm --version
+    - run:   cd ../frontend
+    - run:   npm install yarn
+    - run:   yarn
+    - run:   yarn --version
        
 
     - name: Set up QEMU
@@ -34,8 +33,8 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v1
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
