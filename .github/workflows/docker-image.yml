@@ -17,8 +17,16 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-    - run: npm install -D esbuild
-    - run: npm run build        
+    - run: |
+       cd backend
+       npm install -D esbuild
+       npm --version
+       cd ../frontend
+       npm install yarn
+       yarn
+       yarn --version
+       
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
     - name: Set up Docker Buildx
