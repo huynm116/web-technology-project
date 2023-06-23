@@ -18,13 +18,15 @@ import { useNavigate } from "react-router-dom";
 const type={
   'student':['Name','Student ID', 'Email', 'Gender', 'Contact'],
   'room': ['Room ID','Dorm ID', 'Slot', 'Available', 'Price'],
-  'dorm': ['Dorm ID', 'Number of rooms','Number of available room', 'Status','Notes']
+  'dorm': ['Dorm ID', 'Number of rooms','Number of available room', 'Status','Notes'],
+  'auth': ['Name', 'Username', 'Email', 'Role', 'Age']
 }
 
 const field={
   'student': ['name', 'student_id', 'email', 'gender', 'contact'],
   'room' : ['room_id', 'dorm_id', 'slot', 'available', 'price'],
-  'dorm': ['dorm_id', 'number_of_room', 'avail_room','status','action']
+  'dorm': ['dorm_id', 'number_of_room', 'avail_room','status','action'],
+  'auth': ['name', 'username', 'email','role','age']
 }
 
 const StyledTable = styled(Table)(() => ({

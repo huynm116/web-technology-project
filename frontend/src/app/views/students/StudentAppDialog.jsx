@@ -27,7 +27,7 @@ const StudentAppDialog = () => {
 
 
   const handleSubmit = (event) => {
-    axios.get("http://localhost:4444/api/room/" + student_id).then((res) => {
+    axios.get("http://localhost:4444/api/student/" + student_id).then((res) => {
       if(res.data.data ===null){
         alert("Student does not exist");
         return;

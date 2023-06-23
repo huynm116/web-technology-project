@@ -8,6 +8,7 @@ import materialRoutes from './views/material-kit/MaterialRoutes';
 import studentRoutes from './views/students/StudentRoutes';
 import roomRoutes from './views/rooms/RoomRoutes';
 import dormRoutes from './views/dorms/DormRoutes';
+import accountRoutes from './views/account/AccountRoutes';
 
 const routes = [
   {
@@ -16,7 +17,7 @@ const routes = [
         <MatxLayout />
       </AuthGuard>
     ),
-    children: [...dashboardRoutes, ...materialRoutes, ...studentRoutes, ...roomRoutes, ...dormRoutes],
+    children: [...dashboardRoutes, ...materialRoutes, ...studentRoutes, ...roomRoutes, ...dormRoutes, ...accountRoutes],
   },
   ...sessionRoutes,
   { path: '/', element: <Navigate to="dashboard/default" /> },

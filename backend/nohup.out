@@ -1,0 +1,6 @@
+
+> crud-with-mongodb@1.0.0 start
+> node app.js
+
+Server is running on port  4444
+Connected to database
