@@ -17,13 +17,14 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
-    - run: cd backend
-    - run:   npm install -D esbuild
-    - run:   npm --version
-    - run:   cd ../frontend
-    - run:   npm install yarn
-    - run:   yarn
-    - run:   yarn --version
+    - run: |
+       cd backend
+       npm install -D esbuild
+       npm --version
+       cd ../frontend
+       npm install yarn
+       yarn
+       yarn --version
        
 
     - name: Set up QEMU
