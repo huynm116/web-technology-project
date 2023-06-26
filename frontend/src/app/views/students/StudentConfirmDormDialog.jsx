@@ -20,7 +20,7 @@ function ConfirmationDialogRaw(props) {
   const radioGroupRef = useRef(null);
   const [options, setOptions] = useState(['None']);
   useLayoutEffect(() => {
-    axios.get('http://localhost:4444/api/dorm').then((res) => {
+    axios.get('/api/dorm').then((res) => {
       setOptions(res.data.data);
     }).catch(err => console.log(err));
   }, [])

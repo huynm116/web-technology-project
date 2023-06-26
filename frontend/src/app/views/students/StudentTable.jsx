@@ -7,7 +7,7 @@ const StudentTable = () => {
     const [students, setStudents] = useState([]);
     useLayoutEffect(() => {
             axios
-                .get("http://localhost:4444/api/student")
+                .get("/api/student")
                 .then((res) => {
                     setStudents(res.data.data);
                 })

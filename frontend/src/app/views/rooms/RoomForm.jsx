@@ -20,16 +20,16 @@ const RoomForm = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        axios.get("http://localhost:4444/api/room/" + state.room_id).then((res) => {
+        axios.get("/api/room/" + state.room_id).then((res) => {
             if (res.data.data != null) {
                 alert("Room already exists");
             } else {
-                axios.post("http://localhost:4444/api/room/", state).then((res) => {
-                    axios.put(`http://localhost:4444/api/dorm/${dorm_id}?room_id=${room_id}`).then((res) => {
+                axios.post("/api/room/", state).then((res) => {
+                    axios.put(`/api/dorm/${dorm_id}?room_id=${room_id}`).then((res) => {
                         alert(res.data.status);
                         navigate("/dashboard/default");
                     }).catch(err => {
-                        axios.delete(`http://localhost:4444/api/room/${room_id}`).then((res) => {
+                        axios.delete(`/api/room/${room_id}`).then((res) => {
                             console.log("Cannot add room to dorm -> deleted room");
                         }).catch(err => console.log(err));
                     });

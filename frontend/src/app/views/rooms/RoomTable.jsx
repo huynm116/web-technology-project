@@ -7,7 +7,7 @@ const RoomTable = () => {
     const [rooms, setRooms] = useState([]);
     useLayoutEffect(() => {
             axios
-                .get("http://localhost:4444/api/room")
+                .get("/api/room")
                 .then((res) => {
                     setRooms(res.data.data);
                 })

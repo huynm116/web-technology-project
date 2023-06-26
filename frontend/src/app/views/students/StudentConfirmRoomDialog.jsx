@@ -23,7 +23,7 @@ function ConfirmationDialogRaw(props) {
     let dorm = '';
     onClose('None');
     if(dorm_id!=='None') dorm=`/dorm/${dorm_id}`
-    axios.get(`http://localhost:4444/api/room${dorm}`).then((res) => {
+    axios.get(`/api/room${dorm}`).then((res) => {
       setOptions(res.data.data);
     }).catch(err => console.log(err));
   }, [dorm_id]);

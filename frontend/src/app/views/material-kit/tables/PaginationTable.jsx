@@ -59,7 +59,7 @@ const PaginationTable = (props) => {
   useEffect(() => {
     if (id === '') return;
     if(window.confirm("Do you want to delete "+ objectType + " with id: " + _id)){
-        axios.delete(`http://localhost:4444/api/${objectType}/` + id).then((res) => {
+        axios.delete(`/api/${objectType}/` + id).then((res) => {
         if (res.status === 200) {
           alert(`${objectType.charAt(0).toUpperCase()+objectType.slice(1)} successfully deleted`);
           navigate(`/dashboard/default`);

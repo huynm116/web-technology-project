@@ -7,7 +7,7 @@ const AccountTable = () => {
     const [accounts, setAccounts] = useState([]);
     useLayoutEffect(() => {
             axios
-                .get("http://localhost:4444/api/auth")
+                .get("/api/auth")
                 .then((res) => {
                     setAccounts(res.data.data);
                 })

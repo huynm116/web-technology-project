@@ -23,11 +23,11 @@ const AccountForm = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        axios.get("http://localhost:4444/api/auth/" + state.email).then((res) => {
+        axios.get("/api/auth/" + state.email).then((res) => {
             if (res.data.data != null) {
                 alert("Account already exists");
             } else {
-                axios.post("http://localhost:4444/api/auth/register", state).then((res) => {
+                axios.post("/api/auth/register", state).then((res) => {
                     alert(res.data.status);
                     navigate("/dashboard/default");
                 }).catch(err => console.log(err));

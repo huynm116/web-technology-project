@@ -7,7 +7,7 @@ const DormTable = () => {
     const [dorms, setDorms] = useState([]);
     useLayoutEffect(() => {
             axios
-                .get("http://localhost:4444/api/dorm")
+                .get("/api/dorm")
                 .then((res) => {
                     setDorms(res.data.data);
                 })

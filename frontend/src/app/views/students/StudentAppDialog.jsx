@@ -27,17 +27,17 @@ const StudentAppDialog = () => {
 
 
   const handleSubmit = (event) => {
-    axios.get("http://localhost:4444/api/student/" + student_id).then((res) => {
+    axios.get("/api/student/" + student_id).then((res) => {
       if(res.data.data ===null){
         alert("Student does not exist");
         return;
       }
-      axios.get("http://localhost:4444/api/room/" + room_id).then((res) => {
+      axios.get("/api/room/" + room_id).then((res) => {
         if(res.data.data.available===0){
           alert(`Room ${room_id} is full`);
           return;
         };
-        axios.put(`http://localhost:4444/api/room/${room_id}?student_id=${student_id}`).then((res) => {
+        axios.put(`/api/room/${room_id}?student_id=${student_id}`).then((res) => {
           console.log(res.data);
           alert("Add success");
         }).catch((err) => {console.log(err);});
