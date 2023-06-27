@@ -10,7 +10,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import axios from "axios";
+import axios from 'app/../axios';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

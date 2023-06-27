@@ -1,6 +1,6 @@
 import AppTable from "../material-kit/tables/AppTable";
 import { useLayoutEffect, useState } from "react";
-import axios from "axios";
+import axios from 'app/../axios';
 
 
 const StudentTable = () => {

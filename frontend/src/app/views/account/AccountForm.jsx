@@ -11,7 +11,7 @@ import { Span } from "app/components/Typography";
 import { useState } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from 'app/../axios';
 
 const TextField = styled(TextValidator)(() => ({
     width: "100%",

@@ -12,7 +12,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import { styled } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import axios from 'app/../axios';
 
 function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, ...other } = props;

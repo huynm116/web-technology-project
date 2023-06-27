@@ -6,7 +6,7 @@ import StudentConfirmRoomDialog from './StudentConfirmRoomDialog';
 import { useEffect, useState } from 'react';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { Span } from "app/components/Typography";
-import axios from "axios";
+import axios from 'app/../axios';
 
 const Container = styled('div')(({ theme }) => ({
   margin: '30px',
