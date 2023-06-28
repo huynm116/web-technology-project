@@ -1,38 +1,35 @@
 import {
-    Button,
-    Grid,
-    Icon,
-    styled,
+  Button,
+  FormControlLabel,
+  Grid,
+  Icon,
+  Radio,
+  RadioGroup,
+  styled,
 } from "@mui/material";
 import { Span } from "app/components/Typography";
 import { useState } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import axios from 'app/../axios';
 import { useNavigate } from "react-router-dom";
+import axios from 'app/../axios';
 
 const TextField = styled(TextValidator)(() => ({
     width: "100%",
     marginBottom: "16px",
 }));
 
-const RoomForm = () => {
-    const [state, setState] = useState({ date: new Date() });
+const AccountForm = () => {
+    const [state, setState] = useState({});
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        axios.get("/api/room/" + state.room_id).then((res) => {
+        axios.get("/api/auth/" + state.email).then((res) => {
             if (res.data.data != null) {
-                alert("Room already exists");
+                alert("Account already exists");
             } else {
-                axios.post("/api/room/", state).then((res) => {
-                    axios.put(`/api/dorm/${dorm_id}?room_id=${room_id}`).then((res) => {
-                        alert(res.data.status);
-                        navigate("/dashboard/default");
-                    }).catch(err => {
-                        axios.delete(`/api/room/${room_id}`).then((res) => {
-                            console.log("Cannot add room to dorm -> deleted room");
-                        }).catch(err => console.log(err));
-                    });
+                axios.post("/api/auth/register", state).then((res) => {
+                    alert(res.data.status);
+                    navigate("/dashboard/default");
                 }).catch(err => console.log(err));
             }
         });
@@ -47,11 +44,12 @@ const RoomForm = () => {
 
 
     const {
-        room_id,
-        slot,
-        dorm_id,
-        price,
-        status,
+        role,
+        name,
+        username,
+        email,
+        age,
+        password,
     } = state;
 
     return (
@@ -62,30 +60,29 @@ const RoomForm = () => {
 
                         <TextField
                             type="text"
-                            name="room_id"
-                            label="Room ID"
+                            name="name"
+                            label="Name"
                             onChange={handleChange}
-                            value={room_id || ""}
+                            value={name || ""}
                             validators={["required"]}
                             errorMessages={["this field is required"]}
                         />
-
                         <TextField
                             type="text"
-                            name="dorm_id"
-                            label="Belongs to dorm ID"
+                            name="username"
+                            label="Username"
                             onChange={handleChange}
-                            value={dorm_id || ""}
+                            value={username || ""}
                             validators={["required"]}
                             errorMessages={["this field is required"]}
                         />
 
                         <TextField
                             type="number"
-                            name="slot"
-                            label="Maximum slot"
+                            name="age"
+                            label="Age"
                             onChange={handleChange}
-                            value={slot || ""}
+                            value={age || ""}
                             validators={["required"]}
                             errorMessages={["this field is required"]}
                         />
@@ -96,25 +93,50 @@ const RoomForm = () => {
 
                         <TextField
                             type="text"
-                            name="price"
-                            label="Price"
+                            name="email"
+                            label="Email"
                             onChange={handleChange}
-                            value={price || ""}
-                            validators={["required"]}
+                            value={email || ""}
+                            validators={["required" || "isEmail"]}
                             errorMessages={["this field is required"]}
                         />
-
-
                         <TextField
                             type="text"
-                            name="status"
-                            label="Status"
+                            name="password"
+                            label="Password"
                             onChange={handleChange}
-                            value={status || ""}
+                            value={password || ""}
                             validators={["required"]}
                             errorMessages={["this field is required"]}
                         />
+                        <RadioGroup
+                            row
+                            name="role"
+                            sx={{ mb: 2 }}
+                            value={role || ""}
+                            onChange={handleChange}
+                        >
+                            <FormControlLabel
+                                value="sa"
+                                label="Super Admin"
+                                labelPlacement="end"
+                                control={<Radio color="secondary" />}
+                            />
 
+                            <FormControlLabel
+                                value="admin"
+                                label="Admin"
+                                labelPlacement="end"
+                                control={<Radio color="secondary" />}
+                            />
+
+                            <FormControlLabel
+                                value="guest"
+                                label="Guest"
+                                labelPlacement="end"
+                                control={<Radio color="secondary" />}
+                            />
+                        </RadioGroup>
                     </Grid>
                 </Grid>
 
@@ -127,4 +149,4 @@ const RoomForm = () => {
     );
 };
 
-export default RoomForm;
+export default AccountForm;

@@ -10,7 +10,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import axios from "axios";
+import axios from 'app/../axios';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -18,13 +18,15 @@ import { useNavigate } from "react-router-dom";
 const type={
   'student':['Name','Student ID', 'Email', 'Gender', 'Contact'],
   'room': ['Room ID','Dorm ID', 'Slot', 'Available', 'Price'],
-  'dorm': ['Dorm ID', 'Number of rooms','Number of available room', 'Status','Notes']
+  'dorm': ['Dorm ID', 'Number of rooms','Number of available room', 'Status','Notes'],
+  'auth': ['Name', 'Username', 'Email', 'Role', 'Age']
 }
 
 const field={
   'student': ['name', 'student_id', 'email', 'gender', 'contact'],
   'room' : ['room_id', 'dorm_id', 'slot', 'available', 'price'],
-  'dorm': ['dorm_id', 'number_of_room', 'avail_room','status','action']
+  'dorm': ['dorm_id', 'number_of_room', 'avail_room','status','action'],
+  'auth': ['name', 'username', 'email','role','age']
 }
 
 const StyledTable = styled(Table)(() => ({
@@ -57,7 +59,7 @@ const PaginationTable = (props) => {
   useEffect(() => {
     if (id === '') return;
     if(window.confirm("Do you want to delete "+ objectType + " with id: " + _id)){
-        axios.delete(`http://localhost:4444/api/${objectType}/` + id).then((res) => {
+        axios.delete(`/api/${objectType}/` + id).then((res) => {
         if (res.status === 200) {
           alert(`${objectType.charAt(0).toUpperCase()+objectType.slice(1)} successfully deleted`);
           navigate(`/dashboard/default`);

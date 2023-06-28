@@ -47,16 +47,8 @@ exports.loginAccount = async (req, res) => {
 };
 
 exports.registerAccount = async (req, res) => {
-    // let newUser = {
-    //     role: '',
-    //     name: '',
-    //     username: '',
-    //     email: '',
-    //     age: 0,
-    //     password: '',
-    // }
     try {
-        const { name, email, username, password, age } = req.body;
+        const { name, email, username, password, age, role } = req.body;
         await Account.find({ email: email }).then(user => {
          
 
@@ -66,7 +58,7 @@ exports.registerAccount = async (req, res) => {
                 
                 bcrypt.hash(password, saltRounds).then(hashedPassword => {
                     let newUser = {
-                        role: 'GUEST',
+                        role: role === null ? 'GUEST' : role,
                         email :email,
                         username: username,
                         name: name,
@@ -80,6 +72,7 @@ exports.registerAccount = async (req, res) => {
                     res.status(200).json({
                         accessToken,
                         newUser,
+                        status: "Success"
                     },)
                 }).catch(error => console.log(error));
             }
@@ -94,9 +87,28 @@ exports.registerAccount = async (req, res) => {
 exports.getAllAccounts = async (req, res) => {
     try {
         const accounts = await Account.find();
-        res.json(accounts);
+        res.json({data: accounts, status: "success"});
 
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
+
+exports.deleteAccount = async (req, res) => {
+    try {
+        const account = await Account.findByIdAndDelete(req.params.id);
+        res.json({status: "success"});
+    }catch(err) {
+        res.status(500).json({error: err.message});
+    }
+}
+
+exports.getAccountByEmail = async (req, res) => {
+    try {
+        const accounts = await Account.findOne({email: req.params.id});
+        res.json({data: accounts, status: "success"});
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}

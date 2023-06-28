@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  nginx:
+    image: nhhuy/deploy-test:nginx-latest
+    ports:
+      - 80:80
+    depends_on: 
+      - api
+    
+  api:
+    image: nhhuy/deploy-test:api-latest
+    restart: always
+    ports:
+      - 3001:3001
+    expose:
+      - 3001
+    

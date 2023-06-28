@@ -1,13 +1,13 @@
 import AppTable from "../material-kit/tables/AppTable";
 import { useLayoutEffect, useState } from "react";
-import axios from "axios";
+import axios from 'app/../axios';
 
 
 const DormTable = () => {
     const [dorms, setDorms] = useState([]);
     useLayoutEffect(() => {
             axios
-                .get("http://localhost:4444/api/dorm")
+                .get("/api/dorm")
                 .then((res) => {
                     setDorms(res.data.data);
                 })

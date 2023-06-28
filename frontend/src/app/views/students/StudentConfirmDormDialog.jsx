@@ -12,7 +12,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import { styled } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import axios from 'app/../axios';
 
 function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, ...other } = props;
@@ -20,7 +20,7 @@ function ConfirmationDialogRaw(props) {
   const radioGroupRef = useRef(null);
   const [options, setOptions] = useState(['None']);
   useLayoutEffect(() => {
-    axios.get('http://localhost:4444/api/dorm').then((res) => {
+    axios.get('/api/dorm').then((res) => {
       setOptions(res.data.data);
     }).catch(err => console.log(err));
   }, [])

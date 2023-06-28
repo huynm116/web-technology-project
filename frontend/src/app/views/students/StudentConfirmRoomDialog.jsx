@@ -12,7 +12,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import { styled } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import axios from 'axios';
+import axios from 'app/../axios';
 
 function ConfirmationDialogRaw(props) {
   const { onClose, value: valueProp, open, dorm_id, ...other } = props;
@@ -23,7 +23,7 @@ function ConfirmationDialogRaw(props) {
     let dorm = '';
     onClose('None');
     if(dorm_id!=='None') dorm=`/dorm/${dorm_id}`
-    axios.get(`http://localhost:4444/api/room${dorm}`).then((res) => {
+    axios.get(`/api/room${dorm}`).then((res) => {
       setOptions(res.data.data);
     }).catch(err => console.log(err));
   }, [dorm_id]);

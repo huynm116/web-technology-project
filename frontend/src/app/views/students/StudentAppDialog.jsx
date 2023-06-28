@@ -6,7 +6,7 @@ import StudentConfirmRoomDialog from './StudentConfirmRoomDialog';
 import { useEffect, useState } from 'react';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { Span } from "app/components/Typography";
-import axios from "axios";
+import axios from 'app/../axios';
 
 const Container = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -27,17 +27,17 @@ const StudentAppDialog = () => {
 
 
   const handleSubmit = (event) => {
-    axios.get("http://localhost:4444/api/room/" + student_id).then((res) => {
+    axios.get("/api/student/" + student_id).then((res) => {
       if(res.data.data ===null){
         alert("Student does not exist");
         return;
       }
-      axios.get("http://localhost:4444/api/room/" + room_id).then((res) => {
+      axios.get("/api/room/" + room_id).then((res) => {
         if(res.data.data.available===0){
           alert(`Room ${room_id} is full`);
           return;
         };
-        axios.put(`http://localhost:4444/api/room/${room_id}?student_id=${student_id}`).then((res) => {
+        axios.put(`/api/room/${room_id}?student_id=${student_id}`).then((res) => {
           console.log(res.data);
           alert("Add success");
         }).catch((err) => {console.log(err);});

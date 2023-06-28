@@ -3,13 +3,13 @@ import { useLayoutEffect, useState } from "react";
 import axios from 'app/../axios';
 
 
-const RoomTable = () => {
-    const [rooms, setRooms] = useState([]);
+const AccountTable = () => {
+    const [accounts, setAccounts] = useState([]);
     useLayoutEffect(() => {
             axios
-                .get("/api/room")
+                .get("/api/auth")
                 .then((res) => {
-                    setRooms(res.data.data);
+                    setAccounts(res.data.data);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -17,8 +17,8 @@ const RoomTable = () => {
         },[]);
    
     return (
-        <AppTable dataList={rooms} type={'room'}/>
+        <AppTable dataList={accounts} type={'auth'}/>
     );
 };
 
-export default RoomTable;
+export default AccountTable;

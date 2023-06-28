@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'app/../axios';
 
 export const GET_NOTIFICATION = 'GET_NOTIFICATION';
 export const CREATE_NOTIFICATION = 'CREATE_NOTIFICATION';

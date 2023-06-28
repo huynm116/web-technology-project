@@ -14,7 +14,7 @@ import {
 import { Span } from "app/components/Typography";
 import { useState } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import axios from "axios";
+import axios from 'app/../axios';
 import { useNavigate } from "react-router-dom";
 
 const TextField = styled(TextValidator)(() => ({
@@ -28,12 +28,12 @@ const StudentForm = () => {
 
     const handleSubmit = (event) => {
         console.log("submitted");
-        axios.get("http://localhost:4444/api/student/" + state.student_id).then((res) => {
+        axios.get("/api/student/" + state.student_id).then((res) => {
             console.log(res.data.data);
             if (res.data.data != null) {
                 alert("Student already exists");
             }else{
-                axios.post("http://localhost:4444/api/student/", state).then((res) => {
+                axios.post("/api/student/", state).then((res) => {
                     alert(res.data.status);
                     navigate("/dashboard/default");
                 }).catch(err => console.log(err));
