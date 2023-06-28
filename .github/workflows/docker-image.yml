@@ -1,4 +1,4 @@
-name: Build and Push
+name: CI/CD
 
 on:
   push:
@@ -23,7 +23,41 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push images
-        run: |
-          docker-compose build
-          docker-compose push
+      - name: Build and push backend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend
+          push: true
+          no-cache: true
+          tags: ${{ secrets.DOCKER_USER }}/dorm-management-app:api-latest
+      - name: Build and push frontend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          push: true
+          no-cache: true
+          tags: ${{ secrets.DOCKER_USER }}/dorm-management-app:nginx-latest
+      
+      - name: SCP docker-compose to server
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
+          source: "docker-compose.yml"
+          target: ~/
+  
+  deploy-on-server:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: deploy
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          script: |
+            export DOCKER_USER=${{ secrets.DOCKER_USER }}
+            CI=true docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+            CI=true docker-compose down 
+            CI=true docker-compose build --no-cache
+            CI=true docker-compose up -d --force-recreate
+

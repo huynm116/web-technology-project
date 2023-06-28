@@ -1,11 +1,18 @@
-FROM node:18
+FROM node:18 as build
 WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
-COPY ./ ./
 RUN npm i
 RUN npm uninstall bcrypt
 RUN npm install bcrypt
+COPY . .
+RUN npm run build
+
+FROM nginx:lastest 
+COPY --from=build /app/build /usr/share/nginx/html
+COPY ./default.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
 
 
-CMD ["npm", "run", "start"]
+CMD ["nginx", "-g", "daemon off;"]

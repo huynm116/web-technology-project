@@ -4,13 +4,12 @@ services:
     image: nhhuy/deploy-test:nginx-latest
     ports:
       - 80:80
-    volumes:
-      - ./frontend/build:/usr/share/nginx/html
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on: 
+      - api
     
   api:
     image: nhhuy/deploy-test:api-latest
-    restart: unless-stopped
+    restart: always
     ports:
       - 3001:3001
     expose:
