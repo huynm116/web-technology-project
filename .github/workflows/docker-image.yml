@@ -68,6 +68,6 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
           script: |
-            echo "Ok"
+            echo "Host connection OK"
 
       
