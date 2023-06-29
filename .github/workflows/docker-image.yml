@@ -54,11 +54,8 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
           script: |
-            export DOCKER_USER=${{ secrets.DOCKER_USER }}
             CI=true docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
-            CI=true docker-compose down 
-            CI=true docker-compose build --no-cache
-            CI=true docker-compose up -d --force-recreate
+            CI=true docker-compose down && docker-compose build --pull && docker-compose up -d
   
   test-login:
     runs-on: ubuntu-latest
