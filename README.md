@@ -17,9 +17,5 @@
 * Billing System: It provides a billing module to generate invoices, track payments, and manage financial transactions.
 * Feedback and Communication: The system facilitates communication between administrators and residents through feedback and announcements.
 
-# Secrets
-### DOCKER_USER: nhhuy
-### DOCKER_USER: dckr_pat_cbMwDWHVVvfzWe6fPRRET7hi8Ww
-
 # Contributing
  We welcome contributions to the Dormitory Management System project. If you find any bugs, have suggestions for improvements, or would like to add new features, please feel free to open an issue or submit a pull request.
