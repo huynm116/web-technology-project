@@ -1,17 +1,16 @@
-version: "3.8"
+version: "3.3"
 services:
   nginx:
-    image: nhhuy/deploy-test:nginx-latest
+    image: ${DOCKER_USER}/dorm-management-app:nginx-latest
     ports:
       - 80:80
     depends_on: 
       - api
     
   api:
-    image: nhhuy/deploy-test:api-latest
+    image: ${DOCKER_USER}/dorm-management-app:api-latest
     restart: always
     ports:
       - 3001:3001
-    expose:
-      - 3001
+
     

@@ -7,34 +7,34 @@ export const navigations = [
     name: 'Student',
     icon: 'people',
     children: [
-      { name: 'Student list', iconText: '', path: '/students/list' },
-      { name: 'New Student', iconText: '', path: '/students/create' },
-      { name: 'Add student to room', iconText: '', path: '/students/add' },
+      { name: 'Student List', iconText: 'SL', path: '/students/list' },
+      { name: 'New Student', iconText: 'NS', path: '/students/create' },
+      { name: 'Add Student to Room', iconText: 'AS', path: '/students/add' },
     ]
   },
   {
     name: 'Room',
     icon: 'room',
     children: [
-      { name: 'Room list', iconText: '', path: '/rooms/list' },
-      { name: 'New Room', iconText: '', path: '/rooms/create' },
+      { name: 'Room List', iconText: 'RL', path: '/rooms/list' },
+      { name: 'New Room', iconText: 'NR', path: '/rooms/create' },
     ]
   },
   {
     name: 'Dormitory',
     icon: 'business',
     children: [
-      { name: 'Dorm list', iconText: '', path: '/dorms/list' },
-      { name: 'New Dorm', iconText: '', path: '/dorms/create' },
+      { name: 'Dorm List', iconText: 'DL', path: '/dorms/list' },
+      { name: 'New Dorm', iconText: 'ND', path: '/dorms/create' },
     ]
   },
   { label: 'ACCOUNTS', type: 'label' },
   {
     name: 'Account',
-    icon: 'group',
+    icon: 'people_outline',
     children: [
-      { name: 'Account list', iconText: '', path: '/accounts/list' },
-      { name: 'New account', iconText: '', path: '/accounts/create' },
+      { name: 'Account List', iconText: 'AL', path: '/accounts/list' },
+      { name: 'New Account', iconText: 'NA', path: '/accounts/create' },
     ]
   },
 ];

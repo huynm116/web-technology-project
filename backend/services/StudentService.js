@@ -13,7 +13,7 @@ exports.getStudentByID = async (id) => {
 };
 
 exports.updateStudent = async (id, student) => {
-  return await StudentModel.findByIdAndUpdate(id, student);
+  return await StudentModel.findOneAndUpdate({student_id: id}, student);
 };
 
 exports.deleteStudent = async (id) => {
