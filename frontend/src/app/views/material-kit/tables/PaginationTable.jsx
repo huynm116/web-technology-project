@@ -60,9 +60,9 @@ const PaginationTable = (props) => {
     setPage(0);
   };
 
-  const handleEdit = (objectId) => {
+  const handleEdit = (id) => {
     handleClickOpen();
-    setId(objectId);
+    setId(id);
   }
 
   const handleDelete = (id, objectId) => {
@@ -104,10 +104,10 @@ const PaginationTable = (props) => {
                 <TableCell align="center">{data[field[objectType][4]]}</TableCell>
 
                 <TableCell align="center">
-                  <IconButton onClick={() => handleEdit(data._id)} >
+                  <IconButton onClick={() => handleEdit(data[field[objectType][1]])} >
                     <Icon color="primary">edit_icon</Icon>
                   </IconButton>
-                  <IconButton onClick={() => handleDelete(data[field[objectType][0]], data._id)}>
+                  <IconButton onClick={() => handleDelete(data[field[objectType][1]], data._id)}>
                     <Icon color="error">close</Icon>
                   </IconButton>
 
@@ -130,7 +130,7 @@ const PaginationTable = (props) => {
         backIconButtonProps={{ "aria-label": "Previous Page" }}
       />
 
-      <StudentFormDialog open={open} onClose={handleClose} student_id={id}/>
+      <StudentFormDialog open={open} onClose={handleClose} student_id={id} />
     </Box>
   );
 };

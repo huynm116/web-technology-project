@@ -32,6 +32,10 @@ const StudentAppDialog = () => {
         alert("Student does not exist");
         return;
       }
+      if(res.data.data.room_id !== undefined || res.data.data.room_id !== ""){
+        alert("Student already in a room");
+        return;
+      }
       axios.get("/api/room/" + room_id).then((res) => {
         if(res.data.data.available===0){
           alert(`Room ${room_id} is full`);
