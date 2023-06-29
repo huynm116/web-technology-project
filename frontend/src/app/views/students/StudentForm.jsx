@@ -29,7 +29,6 @@ const StudentForm = () => {
     const handleSubmit = (event) => {
         console.log("submitted");
         axios.get("/api/student/" + state.student_id).then((res) => {
-            console.log(res.data.data);
             if (res.data.data != null) {
                 alert("Student already exists");
             }else{

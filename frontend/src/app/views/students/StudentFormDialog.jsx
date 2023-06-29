@@ -9,13 +9,10 @@ import {
 } from '@mui/material';
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-
 import Dialog from '@mui/material/Dialog';
-//import TextField from '@mui/material/TextField';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import axios from 'app/../axios';
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 const TextField = styled(TextValidator)(() => ({
@@ -40,6 +37,7 @@ export default function StudentFormDialog(props) {
         gender,
         date,
         email,
+        room_id
     } = state;
 
     const handleChange = (event) => {
@@ -49,17 +47,31 @@ export default function StudentFormDialog(props) {
 
     const handleDateChange = (date) => setState({ ...state, date });
 
-    const handleSubmit = (newId) => {
-        if (newId !== id)
-            axios.get("/api/student/" + newId).then((res) => {
-                if (res.data.data === null) {
-                    alert("Student_id existed");
+    const handleSubmit = () => {
+        let newId = state.student_id;
+        axios.get("/api/student/" + newId).then((res) => {
+            if (newId !== id && res.data.data !== null) {
+                alert("Student_id existed");
+                return;
+            }
+            axios.get("/api/room/" + state.room_id).then((res) => {
+                if(res.data.data === null ){
+                    alert("Room id not valid!");
                     return;
+                }
+                if (state.room_id !== res.data.data.room_id) {
+                    // remove student from old room
+                    axios.put(`/api/room/student/remove/${res.data.data.room_id}`).then((res) => console.log("Remove from room")).catch(err => console.log(err))
                 }
                 axios.put("/api/student/" + newId, state).then((res) => {
                     alert("Save succesful");
-                }).catch(err => console.log(err))
-            }).catch(err => console.log(err));
+                }).catch(err => console.log(err));
+                if(state.room_id !== ""){
+                    axios.put(`/api/room/student/add/${state.room_id}?student_id=${newId}`).then((res) => console.log("Add student to new room")).catch(err => console.log(err));
+                }
+            }).catch(err=>console.log(err));
+            
+        }).catch(err => console.log(err));
     }
 
     useLayoutEffect(() => {
@@ -136,6 +148,14 @@ export default function StudentFormDialog(props) {
                                 value={contact || ""}
                                 validators={["required"]}
                                 errormessages={["this field is required"]}
+                            />
+                            <TextField
+                                type="text"
+                                name="room_id"
+                                readOnly={true}
+                                label="Room number"
+                                onChange={handleChange}
+                                value={room_id || ""}
                             />
                             <RadioGroup
                                 row

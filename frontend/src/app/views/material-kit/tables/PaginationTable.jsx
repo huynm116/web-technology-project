@@ -11,22 +11,25 @@ import {
   TableRow,
 } from "@mui/material";
 import axios from 'app/../axios';
+import RoomFormDialog from "app/views/rooms/RoomFormDialog";
 import StudentFormDialog from "app/views/students/StudentFormDialog";
+import DormFormDialog from "app/views/dorms/DormFormDialog";
 import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AccountFormDialog from "app/views/account/AccountFormDialog";
 
 const type = {
-  'student': ['Name', 'Student ID', 'Email', 'Gender', 'Contact'],
+  'student': ['Student ID', 'Name',  'Email', 'Gender', 'Contact'],
   'room': ['Room ID', 'Dorm ID', 'Slot', 'Available', 'Price'],
   'dorm': ['Dorm ID', 'Number of rooms', 'Number of available room', 'Status', 'Notes'],
-  'auth': ['Name', 'Username', 'Email', 'Role', 'Age']
+  'auth': ['Email', 'Name', 'Username',  'Role', 'Age']
 }
 
 const field = {
-  'student': ['name', 'student_id', 'email', 'gender', 'contact'],
+  'student': ['student_id','name' , 'email', 'gender', 'contact'],
   'room': ['room_id', 'dorm_id', 'slot', 'available', 'price'],
   'dorm': ['dorm_id', 'number_of_room', 'avail_room', 'status', 'action'],
-  'auth': ['name', 'username', 'email', 'role', 'age']
+  'auth': ['email', 'name', 'username',  'role', 'age']
 }
 
 const StyledTable = styled(Table)(() => ({
@@ -43,8 +46,8 @@ const StyledTable = styled(Table)(() => ({
 const PaginationTable = (props) => {
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClickOpen = () => setOpen(true) ;
+  const handleClose = () => {setOpen(false)};
 
 
   const [page, setPage] = useState(0);
@@ -104,10 +107,10 @@ const PaginationTable = (props) => {
                 <TableCell align="center">{data[field[objectType][4]]}</TableCell>
 
                 <TableCell align="center">
-                  <IconButton onClick={() => handleEdit(data[field[objectType][1]])} >
+                  <IconButton onClick={() => handleEdit(data[field[objectType][0]])} >
                     <Icon color="primary">edit_icon</Icon>
                   </IconButton>
-                  <IconButton onClick={() => handleDelete(data[field[objectType][1]], data._id)}>
+                  <IconButton onClick={() => handleDelete(data[field[objectType][0]], data._id)}>
                     <Icon color="error">close</Icon>
                   </IconButton>
 
@@ -130,7 +133,10 @@ const PaginationTable = (props) => {
         backIconButtonProps={{ "aria-label": "Previous Page" }}
       />
 
-      <StudentFormDialog open={open} onClose={handleClose} student_id={id} />
+      {objectType === "student" ? <StudentFormDialog open={open} onClose={handleClose} student_id={id} /> : null}
+      {objectType === "room" ? <RoomFormDialog open={open} onClose={handleClose} room_id={id} /> : null}
+      {objectType === "dorm" ? <DormFormDialog open={open} onClose={handleClose} dorm_id={id} /> : null}
+      {objectType === "auth" ? <AccountFormDialog open={open} onClose={handleClose} email={id} /> : null}
     </Box>
   );
 };

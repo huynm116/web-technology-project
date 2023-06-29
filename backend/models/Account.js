@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const AccountSchema = new mongoose.Schema({
     role: {
         type: String,
-        Enumerator: ['SA', 'ADMIN'],
+        Enumerator: ['SA', 'ADMIN', 'EDITOR' ,'GUEST'],
         required: true,
     },
     name: {

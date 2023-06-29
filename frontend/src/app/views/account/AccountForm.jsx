@@ -1,11 +1,11 @@
 import {
-  Button,
-  FormControlLabel,
-  Grid,
-  Icon,
-  Radio,
-  RadioGroup,
-  styled,
+    Button,
+    FormControlLabel,
+    Grid,
+    Icon,
+    Radio,
+    RadioGroup,
+    styled,
 } from "@mui/material";
 import { Span } from "app/components/Typography";
 import { useState } from "react";
@@ -117,21 +117,28 @@ const AccountForm = () => {
                             onChange={handleChange}
                         >
                             <FormControlLabel
-                                value="sa"
+                                value="SA"
                                 label="Super Admin"
                                 labelPlacement="end"
                                 control={<Radio color="secondary" />}
                             />
 
                             <FormControlLabel
-                                value="admin"
+                                value="ADMIN"
                                 label="Admin"
                                 labelPlacement="end"
                                 control={<Radio color="secondary" />}
                             />
 
                             <FormControlLabel
-                                value="guest"
+                                value="EDITOR"
+                                label="Editor"
+                                labelPlacement="end"
+                                control={<Radio color="secondary" />}
+                            />
+
+                            <FormControlLabel
+                                value="GUEST"
                                 label="Guest"
                                 labelPlacement="end"
                                 control={<Radio color="secondary" />}
