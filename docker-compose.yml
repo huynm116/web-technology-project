@@ -1,14 +1,14 @@
 version: "3.3"
 services:
   nginx:
-    image: ${DOCKER_USER}/dorm-management-app:nginx-latest
+    image: nhhuy/dorm-management-app:nginx-latest
     ports:
       - 80:80
     depends_on: 
       - api
     
   api:
-    image: ${DOCKER_USER}/dorm-management-app:api-latest
+    image: nhhuy/dorm-management-app:api-latest
     restart: always
     ports:
       - 3001:3001
