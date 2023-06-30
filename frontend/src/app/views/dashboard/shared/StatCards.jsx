@@ -1,5 +1,9 @@
 import { Box, Card, Grid, Icon, IconButton, styled, Tooltip } from '@mui/material';
 import { Small } from 'app/components/Typography';
+import axios from 'axios';
+import { useLayoutEffect } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',
@@ -27,12 +31,35 @@ const Heading = styled('h6')(({ theme }) => ({
   color: theme.palette.primary.main,
 }));
 
+const dataType = ['student', 'room', 'dorm', 'auth'];
+
 const StatCards = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState({});
+  useLayoutEffect(() => {
+    const fetchData = async() => {
+      try {
+        const newData = await Promise.all(
+          dataType.map(async(type)=>{
+            const res = await axios.get(`/api/${type}`)
+            const keyValue = res.data.data.length;
+            return keyValue;
+          })
+        );
+        console.log(newData)
+        setData(newData);
+        
+      }catch(err) {
+        console.log(err);
+      }
+    }
+    fetchData();
+  }, [])
   const cardList = [
-    { name: 'New Leads', amount: 3050, icon: 'group' },
-    { name: 'This week Sales', amount: '$80,500', icon: 'attach_money' },
-    { name: 'Inventory Status', amount: '8.5% Stock Surplus', icon: 'store' },
-    { name: 'Orders to deliver', amount: '305 Orders', icon: 'shopping_cart' },
+    { name: 'Students', amount: data[0], icon: 'group', id: dataType[0]+'s' },
+    { name: 'Number of rooms', amount: data[1], icon: 'room' , id: dataType[1]+'s'},
+    { name: 'Number of dormitories', amount: data[2], icon: 'business', id: dataType[2]+'s' },
+    { name: 'Number of accounts', amount: data[3], icon: 'people_outline', id:'accounts' },
   ];
 
   return (
@@ -49,7 +76,7 @@ const StatCards = () => {
             </ContentBox>
 
             <Tooltip title="View Details" placement="top">
-              <IconButton>
+              <IconButton onClick={() => navigate(`/${item.id}/list`)}>
                 <Icon>arrow_right_alt</Icon>
               </IconButton>
             </Tooltip>
