@@ -3,8 +3,8 @@ name: Push BE
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - '**/README.md'
+    paths: 
+      - ./backend
 
   pull_request:
     branches: [ "main" ]

@@ -3,8 +3,8 @@ name: Push FE
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - '**/README.md'
+    paths: 
+      - ./frontend
   pull_request:
     branches: [ "main" ]
     paths: 

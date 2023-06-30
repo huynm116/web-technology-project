@@ -5,6 +5,14 @@ on:
     workflows: ["Push FE", "Push BE"]
     types:
       - completed
+  push:
+    branches: [ "main" ]
+    paths: 
+      - ./docker-compose.yml
+  pull_request:
+    branches: [ "main" ]
+    paths: 
+      - ./docker-compose.yml
 
 jobs:
   deploy-on-server:
