@@ -39,7 +39,10 @@ jobs:
           key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
           script: |
             CI=true docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
-            CI=true docker-compose down && docker-compose build --pull && docker-compose up -d
+            CI=true docker-compose down 
+            CI=true docker images --filter=reference=nhhuy/dorm-management-app --format "{{.ID}}" | xargs -I {} docker rmi {}
+            CI=true docker-compose build --pull 
+            CI=true docker-compose up -d --force-recreate
   
   test-login:
     runs-on: ubuntu-latest
